@@ -4,11 +4,50 @@
  */
 package proyecto.estdatos;
 
-/**
- *
- * @author Diego
- */
+import javax.swing.JOptionPane;
+
 public class EliminarPagos {
-         public static void serviciopublico() {
-}
+    
+    public static void serviciopublico() {
+
+        int num = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite el número de factura a eliminar: "));
+        boolean test = true;
+        
+        for (int j = 0; j < 10; j++) {
+            if (Variables.numfactura[j] == num && Variables.montopagado[j] > 0) {
+                int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere eliminar la factura?", "**Confirmación**", JOptionPane.YES_NO_OPTION);
+
+                if (resp == JOptionPane.YES_OPTION) {
+                    Variables.numfactura[num] = 0;
+                    Variables.fecha[num] = "";
+                    Variables.cedula[num] = "";
+                    Variables.nombre[num] = "";
+                    Variables.apellido1[num] = "";
+                    Variables.apellido2[num] = "";
+                    Variables.tipo[num] = 0;
+                    Variables.montopagar[num] = 0;
+                    Variables.montopagado[num] = 0;
+                    Variables.cajav[num] = 0;
+                    Variables.factura[num] = 0;
+                    Variables.comision[num] = 0;
+                    
+                    JOptionPane.showMessageDialog(null, "**Datos eliminados correctamente**");
+                    test = false;
+                    
+                    break;
+                    
+                } else{
+                    JOptionPane.showMessageDialog(null, "**Volviendo al menú principal**");
+                    test = false;
+                    break;
+                    
+                }
+            }
+        }
+
+        if (test) {
+            JOptionPane.showMessageDialog(null, "**Factura no encontrada, no se han eliminado datos**");
+        }
+
+    }
 }
